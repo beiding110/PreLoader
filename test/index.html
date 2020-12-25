@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>preloader</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+</head>
+<body>
+    
+    <script src="../index.js"></script>
+    <script>
+        new PreLoader([
+            './audio/1audio.mp3',
+            './css/animate.min.css',
+            // './html/promise.html',
+            './images/201672716273.png',
+            './images/coin.gif',
+            './images/yuantiao.jpg',
+            './js/vue.min.js',
+            './video/movie.mp4',
+        ]).update(data => {
+            console.log(data);
+        }).complete(() => {
+            console.log('preload complete');
+        }).error(data => {
+            console.warn(data);
+        });
+    </script>
+</body>
+</html>

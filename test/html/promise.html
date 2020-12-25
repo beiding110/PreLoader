@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>标题</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+</head>
+<body>
+	
+	<script type="text/javascript">
+	function redLight() {
+		console.log('red')
+	};
+	function greenLight() {
+		console.log('green')
+	};
+	function yellowLight() {
+		console.log('yellow')
+	};
+
+	function lightController(arr) {
+		arr.forEach(item => {
+			var handler = item.handler;
+			var time = item.time;
+
+			function itemController() {
+				return new Promise((res, rej) => {
+					setTimeout(() => {
+						handler();
+						res();
+					}, time)
+				});
+			};
+
+			function run() {
+				Promise.resolve().then(itemController).then(() => {
+					run();
+				})
+			};
+
+			run();
+		})
+	};
+
+	lightController([
+		{
+			handler: redLight,
+			time: 3000
+		},
+		{
+			handler: greenLight,
+			time: 1000
+		},
+		{
+			handler: yellowLight,
+			time: 2000
+		},
+	]);
+	</script>
+</body>
+</html>
